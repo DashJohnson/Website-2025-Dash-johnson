@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DASH-J-WEBSITE</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo">Diaries Application</a>
+            <div class="navbar__toggle" id="moble-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="tech.html" class="navbar__links">
+                        TEST
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="DEVELOPER_DIARIES.html" class="navbar__links">
+                        DEVELOPER_DIARIES
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="LOGIN.html" class="navbar__links">
+                        LOGIN
+                    </a>
+                </li>
+                <li class="navbar__btn">
+                    <a href="tech.html" class="button">
+                        SIGN_UP
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="help"> search for developer diaries here </div>
+    <form method="get" action="search.html"> 
+        <div class="search">
+            <span class="search-icon material-symbols-outlined">search</span>
+            <input class="search_input" type="search" placeholder="search here" name="searched">
+        </div>
+    </form>
+</body>
+</html>

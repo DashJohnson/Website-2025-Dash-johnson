@@ -1,0 +1,226 @@
+* {
+    box-sizing: border-box;
+    margin: 0;  /* Fix the typo 'marin' */
+    padding: 0;
+    font-family: cursive;
+}
+
+.navbar {
+    background: #b6c2eb;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar__container {
+    display: flex;
+    justify-content: space-between;  /* Distribute space between the logo and menu */
+    height: 80px;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+#navbar__logo {
+    font-size: 3rem;
+    background-color: #b82916bd;
+    background-image: -webkit-linear-gradient(to top, #420f7c 50%, #975bc9 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    flex-grow: 0;  /* Prevent flex grow */
+    flex-shrink: 0;  /* Prevent shrinking */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.navbar__item {
+    margin: 0 15px; /* Add spacing between the items */
+}
+
+.navbar__links {
+    text-decoration: none;
+    color: white;  /* Ensure links are white */
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.navbar__links:hover {
+    color: #ff8177;  /* Change color on hover for better visibility */
+}
+
+.navbar__btn {
+    background-color: #dd97eb;
+    text-decoration-color: #ffffff;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+}
+
+.navbar__btn:hover {
+    color: #ff8177;
+}
+
+.navbar__btn .button {
+    color: white;  /* Ensure the link inside the button is white */
+    text-decoration: none;  /* Remove underline if needed */
+}
+
+.navbar__btn .button:hover {
+    color: #ff8177;
+}
+.help {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 240px;
+    color: #cdd6f3be;
+}
+
+.search {
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Centers the input vertically */
+    margin-top: 10px;
+    padding: 0.5rem 1rem;  /* Reduce padding to make it more pill-like */
+    width: 80%;  /* Make it stretch across the screen (adjust this value as needed) */
+    max-width: 600px;  /* Optional: restrict the max width */
+    color: #d3d2d2;
+    border-radius: 50rem;  /* More rounded, pill-shaped look */
+    background-color: #b6b4b4;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Optional: add a subtle shadow */
+    margin-left: 655px;
+}
+
+.search_input {
+    width: 100%;  /* Make the input fill the container */
+    font-size: 16px;
+    border: none;
+    outline: none;
+    background: transparent;  /* Remove the background so it blends seamlessly with the container */
+    color: #333;  /* Set the text color */
+    padding: 0.5rem 1rem;  /* Add some padding inside the input */
+    border-radius: 50rem;  /* Ensure the input is also pill-shaped */
+}
+
+.login_here {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_1 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 250px;
+}
+
+.login_2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.navbar1 {
+    background: #b6c2eb;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar__container1 {
+    display: flex;
+    justify-content: space-between;  /* Distribute space between the logo and menu */
+    height: 80px;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+#navbar__logo1 {
+    font-size: 3rem;
+    background-color: #b82916bd;
+    background-image: -webkit-linear-gradient(to top, #420f7c 50%, #975bc9 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    flex-grow: 0;  /* Prevent flex grow */
+    flex-shrink: 0;  /* Prevent shrinking */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__menu1 {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.navbar__item1 {
+    margin: 0 15px; /* Add spacing between the items */
+}
+
+.navbar__links1 {
+    text-decoration: none;
+    color: white;  /* Ensure links are white */
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.navbar__links1:hover {
+    color: #ff8177;  /* Change color on hover for better visibility */
+}
+
+.navbar__btn1 {
+    background-color: #dd97eb;
+    text-decoration-color: #ffffff;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+}
+
+.navbar__btn1:hover {
+    color: #ff8177;
+}
+
+.navbar__btn1 .button {
+    color: white;  /* Ensure the link inside the button is white */
+    text-decoration: none;  /* Remove underline if needed */
+}
+
+.navbar__btn1 .button:hover {
+    color: #ff8177;
+}

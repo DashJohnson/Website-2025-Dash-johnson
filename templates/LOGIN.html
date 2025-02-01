@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar1">
+        <div class="navbar__container1">
+            <a href="/" id="navbar__logo1">Diaries Application</a>
+            <div class="navbar__toggle1" id="moble-menu1">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu1">
+                <li class="navbar__item1">
+                    <a href="tech.html" class="navbar__links1">
+                        TEST
+                    </a>
+                </li>
+                <li class="navbar__item1">
+                    <a href="DEVELOPER_DIARIES.html" class="navbar__links1">
+                        DEVELOPER_DIARIES
+                    </a>
+                </li>
+                <li class="navbar__item1">
+                    <a href="index.html" class="navbar__links1">
+                        HOME
+                    </a>
+                </li>
+                <li class="navbar__btn1">
+                    <a href="tech.html" class="button">
+                        SIGN_UP
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <h1>
+        <div class="login_here"> Login </div>
+    </h1>
+    <form>
+        <div class="login_1">
+            <label for="username">username</label>
+            <input type="text" name="nm">
+            <input type="submit" value="submit">
+        </div>
+    </form>
+
+</body>
+</html>
