@@ -18,7 +18,7 @@
             <ul class="navbar__menu1">
                 <li class="navbar__item1">
                     <a href="tech.html" class="navbar__links1">
-                        TEST
+                        ACCOUNT
                     </a>
                 </li>
                 <li class="navbar__item1">
@@ -42,13 +42,16 @@
     <h1>
         <div class="login_here"> Login </div>
     </h1>
-    <form>
+    <form action="/LOGIN.html" method="POST">
         <div class="login_1">
-            <label for="username">username</label>
-            <input type="text" name="nm">
-            <input type="submit" value="submit">
+            <label for="email">Email</label>
+            <input type="text" name="email">  <!-- Change 'nm' to 'email' -->
+            <label for="password">Password</label>
+            <input type="password" name="password">  <!-- Add password input -->
+            <input type="submit" value="Submit">
         </div>
     </form>
+    
 
 </body>
 </html>

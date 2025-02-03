@@ -19,7 +19,7 @@
             <ul class="navbar__menu">
                 <li class="navbar__item">
                     <a href="tech.html" class="navbar__links">
-                        TEST
+                        ACCOUNT
                     </a>
                 </li>
                 <li class="navbar__item">
@@ -33,7 +33,7 @@
                     </a>
                 </li>
                 <li class="navbar__btn">
-                    <a href="tech.html" class="button">
+                    <a href="signup.html" class="button">
                         SIGN_UP
                     </a>
                 </li>
@@ -42,7 +42,7 @@
     </nav>
 
     <div class="help"> search for developer diaries here </div>
-    <form method="get" action="search.html"> 
+    <form method="get" action="{{ url_for('search') }}"> 
         <div class="search">
             <span class="search-icon material-symbols-outlined">search</span>
             <input class="search_input" type="search" placeholder="search here" name="searched">

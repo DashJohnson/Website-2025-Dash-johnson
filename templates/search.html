@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Search Results</title>
 </head>
 <body>
-    <div class="UPDATE_SOON">you reached the search page </div>
+    <h1>Search Results</h1>
+    {% if query %}
+        <p>You searched for: {{ query }}</p>
+        <!-- You can display search results here, for now just showing the query -->
+    {% else %}
+        <p>No search query provided.</p>
+    {% endif %}
 </body>
 </html>
