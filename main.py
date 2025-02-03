@@ -84,27 +84,31 @@ def signup():
 @app.route("/LOGIN.html", methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        email = request.form["email"]  # Fix this to match form field
-        password = request.form["password"]  # Ensure the form has a password field
-        user = User.query.filter_by(email=email, password=password).first()  
+        email = request.form["email"]
+        password = request.form["password"]
+        user = User.query.filter_by(email=email, password=password).first()
         if user:
             encrypted_password = caesar_encrypt(password, 3)
             encrypted_username = caesar_encrypt(email, 3)
-            session["user"] = user
-            return redirect(url_for("user", usr=encrypted_username))  # Corrected line
+            session["user_id"] = user.id  # Store only user_id in session
+            return redirect(url_for("user", usr=encrypted_username))  
         else:
-            return "Invalid credentials, try again"  # More user-friendly response
-    return render_template("LOGIN.html")  # This will render the login page when the method is GET
+            return "Invalid credentials, try again"
+    return render_template("LOGIN.html")
+
 
 
 
 
 @app.route("/<usr>")
 def user(usr):
-    if user in session:
-        user = session["user"]
-    decrypted_username = caesar_decrypt(usr, 3)  # Decrypt the username
-    return render_template("password.html", usr=decrypted_username)  # Show the password page
+    if "user_id" in session:  # Check if the user_id exists in the session
+        user = User.query.get(session["user_id"])  # Fetch the user from the database
+        if user:
+            decrypted_username = caesar_decrypt(usr, 3)  # Decrypt the username
+            return render_template("password.html", usr=decrypted_username)
+    return redirect(url_for("login"))  # Redirect to login if user is not logged in
+
 
 @app.route("/index.html")
 def homepage():
