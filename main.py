@@ -3,6 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 
 app = Flask(__name__)
+app.secret_key = "f$F9w@K^b7Zp8lm@JzUuD"
+
 
 # Replace with your actual database URI
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///newdatabase.db"  # Example for SQLite
@@ -88,7 +90,7 @@ def login():
         if user:
             encrypted_password = caesar_encrypt(password, 3)
             encrypted_username = caesar_encrypt(email, 3)
-            session["user" = user]
+            session["user"] = user
             return redirect(url_for("user", usr=encrypted_username))  # Corrected line
         else:
             return "Invalid credentials, try again"  # More user-friendly response
@@ -99,6 +101,8 @@ def login():
 
 @app.route("/<usr>")
 def user(usr):
+    if user in session:
+        user = session["user"]
     decrypted_username = caesar_decrypt(usr, 3)  # Decrypt the username
     return render_template("password.html", usr=decrypted_username)  # Show the password page
 
