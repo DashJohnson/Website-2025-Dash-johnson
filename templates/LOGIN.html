@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <!-- Flash Message Section -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="flash-messages">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    {% endwith %}
+
     <nav class="navbar1">
         <div class="navbar__container1">
             <a href="/" id="navbar__logo1">Diaries Application</a>
@@ -17,7 +30,7 @@
             </div>
             <ul class="navbar__menu1">
                 <li class="navbar__item1">
-                    <a href="tech.html" class="navbar__links1">
+                    <a href="account.html" class="navbar__links1">
                         ACCOUNT
                     </a>
                 </li>
@@ -39,19 +52,19 @@
             </ul>
         </div>
     </nav>
+
     <h1>
         <div class="login_here"> Login </div>
     </h1>
+
     <form action="/LOGIN.html" method="POST">
         <div class="login_1">
             <label for="email">Email</label>
-            <input type="text" name="email">  <!-- Change 'nm' to 'email' -->
+            <input type="text" name="email">  
             <label for="password">Password</label>
-            <input type="password" name="password">  <!-- Add password input -->
+            <input type="password" name="password">
             <input type="submit" value="Submit">
         </div>
     </form>
-    
-
 </body>
 </html>

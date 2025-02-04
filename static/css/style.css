@@ -5,8 +5,14 @@
     font-family: cursive;
 }
 
+body {
+    background-image: url('simple-space-backgrounds-3840x2160-moon-stars-night-sky-26298.jpg');
+    background-size: 1920px 1080px; /* Width and height in pixels */
+    background-position: center center; /* Centers the image */
+    background-repeat: repeat; /* Prevents the image from repeating */
+  }
 .navbar {
-    background: #b6c2eb;
+    background: #030d2c44;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -30,7 +36,7 @@
 
 #navbar__logo {
     font-size: 3rem;
-    background-color: #b82916bd;
+    background-color: #6d2ae9da;
     background-image: -webkit-linear-gradient(to top, #420f7c 50%, #975bc9 100%);
     background-size: 100%;
     -webkit-background-clip: text;
@@ -101,16 +107,44 @@
     align-items: center;  /* Centers the input vertically */
     margin-top: 10px;
     padding: 0.5rem 1rem;  /* Reduce padding to make it more pill-like */
-    width: 80%;  /* Make it stretch across the screen (adjust this value as needed) */
+    width: 80%;  
     max-width: 600px;  /* Optional: restrict the max width */
     color: #d3d2d2;
-    border-radius: 50rem;  /* More rounded, pill-shaped look */
+    border-radius: 50rem;  
     background-color: #b6b4b4;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  /* Optional: add a subtle shadow */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
     margin-left: 655px;
 }
 
+.search_options {
+    display: flex;
+    justify-content: center;
+    align-items: center;  /* Centers the input vertically */
+    margin-top: 10px;
+    padding: 0.5rem 1rem;
+
+}
+
+.search_button {
+    background-color: #6d2ae9;  /* Add a background color to the button */
+    color: white;  /* Text color */
+    font-size: 1rem;  /* Font size */
+    padding: 0.8rem 2rem;  /* Padding around the button */
+    border: none;  /* Remove the default border */
+    border-radius: 50rem;  /* Rounded corners */
+    cursor: pointer;  /* Add pointer cursor for the button */
+    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
+    margin-left: 10px;  /* Adjust if you need some space around the button */
+    text-transform: uppercase;
+    margin-left: 900px;
+    margin-top: 10px;  /* Optionally, make the button text uppercase */
+}
+
+.search_button:hover {
+    background-color: #ff8177;  /* Change background color on hover */
+    color: #fff;  /* Ensure text color stays white on hover */
+}
 .search_input {
     width: 100%;  /* Make the input fill the container */
     font-size: 16px;
@@ -143,7 +177,7 @@
 }
 
 .navbar1 {
-    background: #b6c2eb;
+    background: #030d2c44;
     height: 80px;
     display: flex;
     justify-content: center;
@@ -167,7 +201,7 @@
 
 #navbar__logo1 {
     font-size: 3rem;
-    background-color: #b82916bd;
+    background-color: #6d2ae9da;
     background-image: -webkit-linear-gradient(to top, #420f7c 50%, #975bc9 100%);
     background-size: 100%;
     -webkit-background-clip: text;
@@ -223,4 +257,27 @@
 
 .navbar__btn1 .button:hover {
     color: #ff8177;
+}
+
+.flash-messages {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff8177;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 1000;
+    font-size: 1.2rem;
+}
+
+.flash-messages ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.flash-messages li {
+    text-align: center;
 }

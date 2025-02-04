@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Diary</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #a114e829;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #914bed78;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #914bed78;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .diary-entry {
+            background-color: #914bed78;
+            padding: 15px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .diary-entry p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar__container">
+            <a href="/" id="navbar__logo">Diaries Application</a>
+            <div class="navbar__toggle" id="moble-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="navbar__menu">
+                <li class="navbar__item">
+                    <a href="account.html" class="navbar__links">
+                        ACCOUNT
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="index.html" class="navbar__links">
+                        HOME
+                    </a>
+                </li>
+                <li class="navbar__item">
+                    <a href="LOGIN.html" class="navbar__links">
+                        LOGIN
+                    </a>
+                </li>
+                <li class="navbar__btn">
+                    <a href="signup.html" class="button">
+                        SIGN_UP
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Developer Diary</h1>
+        
+        <!-- Diary entry form -->
+        <form action="/submit" method="POST">
+            <textarea name="entry" placeholder="Write your developer diary entry here..."></textarea>
+            <br><br>
+            <button type="submit">Submit Entry</button>
+        </form>
+
+        <h2>Previous Entries</h2>
+        <div>
+            {% for entry in entries %}
+                <div class="diary-entry">
+                    <p>{{ entry }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
