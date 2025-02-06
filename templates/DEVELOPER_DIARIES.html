@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Developer Diary</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,6 +62,17 @@
         .diary-entry p {
             margin: 0;
         }
+        .flash-messages {
+            background-color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            list-style: none;
+        }
+        .flash-messages li {
+            color: #333;
+            font-size: 1.2em;
+        }
     </style>
 </head>
 <body>
@@ -93,10 +111,23 @@
 
     <div class="container">
         <h1>Developer Diary</h1>
-        
+
+        <!-- Flash messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
         <!-- Diary entry form -->
         <form action="/submit" method="POST">
-            <textarea name="entry" placeholder="Write your developer diary entry here..."></textarea>
+            <textarea name="code_entry" placeholder="Write your code here..."></textarea>
+            <br><br>
+            <textarea name="note_entry" placeholder="Write your notes here..."></textarea>
             <br><br>
             <button type="submit">Submit Entry</button>
         </form>

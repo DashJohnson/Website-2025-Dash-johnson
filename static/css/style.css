@@ -2,14 +2,19 @@
     box-sizing: border-box;
     margin: 0;  /* Fix the typo 'marin' */
     padding: 0;
-    font-family: cursive;
+    font-family:"Kanit", serif;
 }
+
+
+
 
 body {
     background-image: url('simple-space-backgrounds-3840x2160-moon-stars-night-sky-26298.jpg');
-    background-size: 1920px 1080px; /* Width and height in pixels */
-    background-position: center center; /* Centers the image */
-    background-repeat: repeat; /* Prevents the image from repeating */
+    background-size: cover;
+    background-position: center center; 
+    background-repeat: none; 
+    margin: 0; 
+    height: 100vh; 
   }
 .navbar {
     background: #030d2c44;
@@ -25,7 +30,7 @@ body {
 
 .navbar__container {
     display: flex;
-    justify-content: space-between;  /* Distribute space between the logo and menu */
+    justify-content: space-between;
     height: 80px;
     align-items: center;
     width: 100%;
@@ -33,6 +38,7 @@ body {
     margin: 0 auto;
     padding: 0 50px;
 }
+
 
 #navbar__logo {
     font-size: 3rem;
@@ -45,10 +51,18 @@ body {
     -moz-text-fill-color: transparent;
     text-decoration: none;
     cursor: pointer;
-    flex-grow: 0;  /* Prevent flex grow */
-    flex-shrink: 0;  /* Prevent shrinking */
+    flex-grow: 0;
+    flex-shrink: 0;
     margin: 0;
     padding: 0;
+    display: flex;  /* Make the container flex */
+    align-items: center;  /* Vertically align the icon and text */
+}
+
+.navbar__logo-icon {
+    width: 40px;  /* Set a specific width for the icon */
+    height: 40px;  /* Set a specific height for the icon */
+    margin-right: 10px;  /* Add space between the icon and the text */
 }
 
 .navbar__menu {
@@ -74,7 +88,7 @@ body {
 }
 
 .navbar__btn {
-    background-color: #dd97eb;
+    background-color: #9f8bf6c5;
     text-decoration-color: #ffffff;
     border-radius: 1rem;
     border: none;
@@ -106,15 +120,16 @@ body {
     justify-content: center;
     align-items: center;  /* Centers the input vertically */
     margin-top: 10px;
-    padding: 0.5rem 1rem;  /* Reduce padding to make it more pill-like */
-    width: 80%;  
+    padding: 0.5rem 1rem;
+    width: 80%;  /* This will make the search bar responsive */
     max-width: 600px;  /* Optional: restrict the max width */
     color: #d3d2d2;
     border-radius: 50rem;  
     background-color: #b6b4b4;
     cursor: pointer;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);  
-    margin-left: 655px;
+    margin-left: auto;  /* Automatically adjusts the position */
+    margin-right: auto; /* Ensures it's centered horizontally */
 }
 
 .search_options {
@@ -123,22 +138,21 @@ body {
     align-items: center;  /* Centers the input vertically */
     margin-top: 10px;
     padding: 0.5rem 1rem;
-
 }
 
 .search_button {
-    background-color: #6d2ae9;  /* Add a background color to the button */
-    color: white;  /* Text color */
-    font-size: 1rem;  /* Font size */
-    padding: 0.8rem 2rem;  /* Padding around the button */
-    border: none;  /* Remove the default border */
-    border-radius: 50rem;  /* Rounded corners */
-    cursor: pointer;  /* Add pointer cursor for the button */
-    transition: background-color 0.3s ease;  /* Smooth transition for hover effect */
-    margin-left: 10px;  /* Adjust if you need some space around the button */
+    display: flex;
+    justify-content: center;
+    background-color: #6d2ae9;
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 50rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;  /* Keeps space between the search bar and button */
     text-transform: uppercase;
-    margin-left: 900px;
-    margin-top: 10px;  /* Optionally, make the button text uppercase */
 }
 
 .search_button:hover {
@@ -239,7 +253,7 @@ body {
 }
 
 .navbar__btn1 {
-    background-color: #dd97eb;
+    background-color: #9f8bf6c5;
     text-decoration-color: #ffffff;
     border-radius: 1rem;
     border: none;
@@ -261,7 +275,7 @@ body {
 
 .flash-messages {
     position: fixed;
-    top: 20px;
+    top: 500px;  /* Increase this value to move the box lower */
     left: 50%;
     transform: translateX(-50%);
     background-color: #ff8177;
@@ -274,10 +288,118 @@ body {
 
 .flash-messages ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    margin: 0;  /* Remove any margins that may add unwanted space */
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
 }
 
 .flash-messages li {
     text-align: center;
+}
+
+.navbar2 {
+    background: #030d2c44;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+.navbar__container2 {
+    display: flex;
+    justify-content: space-between;  /* Distribute space between the logo and menu */
+    height: 80px;
+    align-items: center;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 50px;
+}
+
+#navbar__logo2 {
+    font-size: 3rem;
+    background-color: #6d2ae9da;
+    background-image: -webkit-linear-gradient(to top, #420f7c 50%, #975bc9 100%);
+    background-size: 100%;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-text-fill-color: transparent;
+    text-decoration: none;
+    cursor: pointer;
+    flex-grow: 0;  /* Prevent flex grow */
+    flex-shrink: 0;  /* Prevent shrinking */
+    margin: 0;
+    padding: 0;
+}
+
+.navbar__menu2 {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    text-align: center;
+}
+
+.navbar__item2 {
+    margin: 0 15px; /* Add spacing between the items */
+}
+
+.navbar__links2 {
+    text-decoration: none;
+    color: white;  /* Ensure links are white */
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.navbar__links2:hover {
+    color: #ff8177;  /* Change color on hover for better visibility */
+}
+
+.navbar__btn2 {
+    background-color: #9f8bf6c5;
+    text-decoration-color: #ffffff;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+}
+
+.navbar__btn2:hover {
+    color: #ff8177;
+}
+
+.navbar__btn2 .button {
+    color: white;  /* Ensure the link inside the button is white */
+    text-decoration: none;  /* Remove underline if needed */
+}
+
+.navbar__btn2 .button:hover {
+    color: #ff8177;
+}
+
+.accountname {
+    display: flex;
+}
+
+
+.diary-entry {
+    background-color: rgba(0, 0, 0, 0.6); /* Dark background for entries */
+    color: #f0f0f0;  /* Light color text */
+    padding: 15px;
+    margin: 15px;
+    border-radius: 8px;
+}
+
+.diary-entry pre {
+    background-color: #333;
+    color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.diary-entry p {
+    margin-bottom: 10px;
 }

@@ -1,10 +1,15 @@
 from flask import Flask, redirect, url_for, render_template, request, session, flash
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime
+from datetime import datetime, timedelta
+from cryptography.hazmat.primitives.asymmetric import rsa
+from cryptography.hazmat.primitives import serialization
+import bcrypt
+import bleach
 
 app = Flask(__name__)
 app.secret_key = "f$F9w@K^b7Zp8lm@JzUuD"
 
+app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(minutes=45)
 
 # Replace with your actual database URI
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///newdatabase.db"  # Example for SQLite
@@ -23,9 +28,23 @@ class Entry(db.Model):
     entrieid = db.Column("entrieid", db.Integer, primary_key=True)
     content = db.Column("content", db.String(500), nullable=False)
     date_posted = db.Column("date_posted", db.DateTime, default=datetime.utcnow)
+    developer_name = db.Column("developer_name", db.String(200), nullable=False)
 
     def __repr__(self):
         return '<Entry %r>' % self.entrieid
+
+def hash_password(password: str) -> str:
+    # Generate a salt
+    salt = bcrypt.gensalt()
+    # Hash the password with the salt
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), salt)
+    return hashed_password.decode('utf-8')  
+
+def check_password(stored_password: str, entered_password: str) -> bool:
+    return bcrypt.checkpw(entered_password.encode('utf-8'), stored_password.encode('utf-8'))
+
+
+
 
 # Caesar cipher encryption and decryption functions
 def caesar_encrypt(text, shift):
@@ -77,7 +96,8 @@ def signup():
         if existing_email:
             flash("email is already being used")
         else:
-            new_user = User(email=email, password=password)
+            hashed_password = hash_password(password)
+            new_user = User(email=email, password=hashed_password)
             db.session.add(new_user)
             db.session.commit()
             return redirect(url_for("home")) 
@@ -87,23 +107,28 @@ def signup():
 
 @app.route("/LOGIN.html", methods=["POST", "GET"])
 def login():
-    if "user_id" in session:  # Check if the user is already logged in
-        user = User.query.get(session["user_id"])  # Fetch the user from the database
-        encrypted_email = caesar_encrypt(user.email, 3)  # Encrypt email
-        return redirect(url_for("user", usr=encrypted_email))  # Redirect to user page with encrypted email
+    if "user_id" in session:  
+        user = User.query.get(session["user_id"])  
+        encrypted_email = caesar_encrypt(user.email, 3) 
+        return redirect(url_for("user", usr=encrypted_email)) 
 
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-        user = User.query.filter_by(email=email, password=password).first()
-        if user:
-            encrypted_password = caesar_encrypt(password, 3)  # Encrypt password if needed
-            encrypted_username = caesar_encrypt(email, 3)  # Encrypt email
-            session["user_id"] = user.id  # Store only user_id in session
-            return redirect(url_for("user", usr=encrypted_username))  # Redirect to user page with encrypted email
+        user = User.query.filter_by(email=email).first()
+
+        if user and check_password(user.password, password):  # Verify password hash
+            encrypted_password = caesar_encrypt(password, 3)  
+            encrypted_username = caesar_encrypt(email, 3) 
+            session["user_id"] = user.id
+            session.permanent = True
+            return redirect(url_for("user", usr=encrypted_username))  
         else:
-            return "Invalid credentials, try again"
+            flash("Invalid credentials, try again")  
+            return redirect(url_for("login"))  
+
     return render_template("LOGIN.html")
+
 
 
 
@@ -125,38 +150,46 @@ def homepage():
 
 @app.route("/account.html")
 def account():
-    return render_template("account.html")
+    if "user_id" in session:
+        user = User.query.get(session["user_id"])
+        flash(f"You are logged in and viewing your account. {user.email}")  # Flash message for logged-in user
+        encrypted_email = caesar_encrypt(user.email, 3)
+        return render_template("account.html", email=encrypted_email)  # Render account page with the message
+    else:
+        flash("you are not logged in")
+        return redirect(url_for("login"))  # Redirect to login if user is not logged in
+
+
+
 
 @app.route("/logout.html")
 def logout():
-    flash("you have been logged out")
     session.clear()
+    flash("you have been logged out")
     return redirect(url_for("login"))
 
 @app.route("/DEVELOPER_DIARIES.html")
 def diaries():
     entries = Entry.query.all()
-    return render_template("DEVELOPER_DIARIES.html")
+    return render_template("DEVELOPER_DIARIES.html", entries=entries)
 
 @app.route("/search.html", methods=["GET", "POST"])
 def search():
     if request.method == "POST":
-        query = request.form.get("searched")  # Get the search query from the form
-        search_by = request.form.get("search_by")  # Get which field to search by (developer, date, content)
+        query = request.form.get("searched")
+        search_by = request.form.get("search_by")
 
         if query:
+            query = bleach.clean(query)  # Sanitize search input
             if search_by == "developer":
-                # Assuming "developer" is a field or related model, adapt to your schema
-                results = Entry.query.filter(Entry.developer.contains(query)).all()  
+                results = Entry.query.filter(Entry.developer_name.contains(query)).all()
             elif search_by == "date":
-                # Assuming "date_posted" is a datetime field, adapt to format
                 try:
-                    date_query = datetime.strptime(query, "%Y-%m-%d")  # Date format: YYYY-MM-DD
+                    date_query = datetime.strptime(query, "%Y-%m-%d")
                     results = Entry.query.filter(Entry.date_posted == date_query).all()
                 except ValueError:
-                    results = []  # If the date format is wrong, return no results
+                    results = []
             else:
-                # Default search by content
                 results = Entry.query.filter(Entry.content.contains(query)).all()
 
             return render_template("search.html", query=query, results=results)
@@ -164,14 +197,37 @@ def search():
     return render_template("search.html", query=None)
 
 
+
 @app.route("/submit", methods=["POST"])
 def submit():
-    entry_content = request.form.get('entry')
-    if entry_content:
-        new_entry = Entry(content=entry_content)
-        db.session.add(new_entry)
-        db.session.commit()
-    return redirect(url_for('diaries'))
+    if "user_id" not in session:
+        flash("You have to be logged in to post developer diaries")  
+        return redirect(url_for("login"))  
+
+    user = User.query.get(session["user_id"]) 
+    if user:  
+        code_content = request.form.get('code_entry') 
+        note_content = request.form.get('note_entry') 
+        
+        # Sanitize the inputs to prevent XSS
+        sanitized_code_content = bleach.clean(code_content)  # Sanitize code entry
+        sanitized_note_content = bleach.clean(note_content)  # Sanitize note entry
+        
+        if sanitized_code_content and sanitized_note_content:
+            # Create the new entry without checking for duplicates
+            new_entry = Entry(
+                content=f"Code:\n{sanitized_code_content}\n\nNotes:\n{sanitized_note_content}", 
+                developer_name=user.email
+            )
+            db.session.add(new_entry)
+            db.session.commit()  
+            flash("Developer diary posted successfully!") 
+        
+        return redirect(url_for('diaries'))  
+    else:
+        flash("User not found")  
+        return redirect(url_for('login'))
+
 
 # Ensure database creation happens within the app context
 if __name__ == "__main__":
